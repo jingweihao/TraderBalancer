@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xmlns:clustering="http://cxf.apache.org/clustering"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    
+<!--  <util:list id="ServersList">
+        <value>http://localhost:8080/TraderService/S</value>
+        <value>http://localhost:8010/TraderService/S</value>
+    </util:list>
+     
+    <bean id="RandomAddresses" class="org.apache.cxf.clustering.RandomStrategy">
+        <property name="alternateAddresses">
+            <ref bean="ServersList"/>
+        </property>
+    </bean>
+ -->    
+    <jaxws:client id="balancer1" serviceClass = "com.service.Search">
+       <jaxws:features>
+           <clustering:loadDistributor>
+                <clustering:strategy>
+                    <bean class="org.apache.cxf.clustering.RandomStrategy">
+				        <property name="alternateAddresses">
+				            <util:list>
+						        <value>http://localhost:8080/TraderService/S</value>
+						        <!-- <value>http://localhost:8010/TraderService/S</value>  -->
+						    </util:list>
+				        </property>
+				    </bean>
+                </clustering:strategy>
+            </clustering:loadDistributor>
+       </jaxws:features>
+    </jaxws:client>
+
+    <jaxws:client id="balancer2" serviceClass = "com.service.PersonalSales">
+       <jaxws:features>
+           <clustering:loadDistributor>
+                <clustering:strategy>
+                    <bean class="org.apache.cxf.clustering.RandomStrategy">
+				        <property name="alternateAddresses">
+				            <util:list>
+						        <value>http://localhost:8080/TraderService/PS</value>
+						        <!-- <value>http://localhost:8010/TraderService/PS</value>  -->
+						    </util:list>
+				        </property>
+				    </bean>
+                </clustering:strategy>
+            </clustering:loadDistributor>
+       </jaxws:features>
+    </jaxws:client>
+
+</beans>
