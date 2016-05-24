@@ -3,7 +3,7 @@ package com.data;
 
 public class Sales
 {
-	
+	private String id;
 	private String img;
 	private String name;
 	private String price;
@@ -14,12 +14,18 @@ public class Sales
 		
 	}
 	
-	public Sales(String img, String name, String price, String info)
+	public Sales(String id, String img, String name, String price, String info)
 	{
+		this.id = id;
 		this.img = img;
 		this.name = name;
 		this.price = price;
 		this.info = info;
+	}
+	
+	public void setId(String id)
+	{
+		this.id = id;
 	}
 	
 	public void setImg(String img)
@@ -40,6 +46,11 @@ public class Sales
 	public void setInfo(String info)
 	{
 		this.info = info;
+	}
+	
+	public String getId()
+	{
+		return id;
 	}
 	
 	public String getImg()

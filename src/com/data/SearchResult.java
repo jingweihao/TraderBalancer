@@ -1,23 +1,31 @@
 package com.data;
 
+
 public class SearchResult 
 {
+	private String id;
 	private String img;
 	private String name;
 	private String price;
 	private String info;
-	
+		
 	public SearchResult()
 	{
 		
 	}
 	
-	public SearchResult(String img, String name, String price, String info)
+	public SearchResult(String id, String img, String name, String price, String info)
 	{
+		this.id = id;
 		this.img = img;
 		this.name = name;
 		this.price = price;
 		this.info = info;
+	}
+	
+	public void setId(String id)
+	{
+		this.id = id;
 	}
 	
 	public void setImg(String img)
@@ -38,6 +46,11 @@ public class SearchResult
 	public void setInfo(String info)
 	{
 		this.info = info;
+	}
+	
+	public String getId()
+	{
+		return id;
 	}
 	
 	public String getImg()
