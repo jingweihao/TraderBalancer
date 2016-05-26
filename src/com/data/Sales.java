@@ -4,20 +4,21 @@ package com.data;
 public class Sales
 {
 	private String id;
-	private String img;
+	private String imgpath;
 	private String name;
 	private String price;
 	private String info;
+	private String category;
 		
 	public Sales()
 	{
 		
 	}
 	
-	public Sales(String id, String img, String name, String price, String info)
+	public Sales(String id, String imgpath, String name, String price, String info)
 	{
 		this.id = id;
-		this.img = img;
+		this.imgpath = imgpath;
 		this.name = name;
 		this.price = price;
 		this.info = info;
@@ -28,9 +29,9 @@ public class Sales
 		this.id = id;
 	}
 	
-	public void setImg(String img)
+	public void setImgpath(String imgpath)
 	{
-		this.img = img;
+		this.imgpath = imgpath;
 	}
 	
 	public void setName(String name)
@@ -48,16 +49,21 @@ public class Sales
 		this.info = info;
 	}
 	
+	public void setCategory(String category)
+	{
+		this.category = category;
+	}
+	
 	public String getId()
 	{
 		return id;
 	}
 	
-	public String getImg()
+	public String getImgpath()
 	{
-		return img;
+		return imgpath;
 	}
-	
+		
 	public String getName()
 	{
 		return name;
@@ -73,5 +79,14 @@ public class Sales
 		return info;
 	}
 
+	public String getCategory()
+	{
+		return category;
+	}
+	
+	public String toString()
+	{
+		return "(" + id + "," + name + "," + category + "," + price + "," + info + "," + imgpath + ")";
+	}
 
 }

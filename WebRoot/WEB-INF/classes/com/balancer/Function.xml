@@ -54,4 +54,39 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
        </jaxws:features>
     </jaxws:client>
 
+    <jaxws:client id="balancer3" serviceClass = "com.service.AddItem">
+       <jaxws:features>
+           <clustering:loadDistributor>
+                <clustering:strategy>
+                    <bean class="org.apache.cxf.clustering.RandomStrategy">
+				        <property name="alternateAddresses">
+				            <util:list>
+						        <value>http://localhost:8080/TraderService/ADD</value>
+						        <!-- <value>http://localhost:8010/TraderService/PS</value>  -->
+						    </util:list>
+				        </property>
+				    </bean>
+                </clustering:strategy>
+            </clustering:loadDistributor>
+       </jaxws:features>
+    </jaxws:client>
+
+    <jaxws:client id="balancer4" serviceClass = "com.service.DeleteItem">
+       <jaxws:features>
+           <clustering:loadDistributor>
+                <clustering:strategy>
+                    <bean class="org.apache.cxf.clustering.RandomStrategy">
+				        <property name="alternateAddresses">
+				            <util:list>
+						        <value>http://localhost:8080/TraderService/DEL</value>
+						        <!-- <value>http://localhost:8010/TraderService/PS</value>  -->
+						    </util:list>
+				        </property>
+				    </bean>
+                </clustering:strategy>
+            </clustering:loadDistributor>
+       </jaxws:features>
+    </jaxws:client>
+
+
 </beans>

@@ -1,9 +1,7 @@
 package com.service;
 
 import java.util.*;
-
 import javax.jws.WebService;
-
 import com.data.Sales;
 
 @WebService

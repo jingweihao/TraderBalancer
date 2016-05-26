@@ -13,4 +13,9 @@ public interface GetService
 	public ArrayList<SearchResult> SearchService(String keyword);
 	
 	public ArrayList<Sales> SalesService(String username);
+	
+	public String AddItemService(Sales sales);
+	
+	public boolean DeleteItemService(String itemid);
+	
 }
