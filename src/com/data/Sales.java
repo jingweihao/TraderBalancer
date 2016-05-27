@@ -9,19 +9,24 @@ public class Sales
 	private String price;
 	private String info;
 	private String category;
+	private String sellername;
+	private String sellertel;
 		
 	public Sales()
 	{
 		
 	}
 	
-	public Sales(String id, String imgpath, String name, String price, String info)
+	public Sales(String id, String imgpath, String name, String price, String info, String category, String sellername, String sellertel)
 	{
 		this.id = id;
 		this.imgpath = imgpath;
 		this.name = name;
 		this.price = price;
 		this.info = info;
+		this.category = category;
+		this.sellername = sellername;
+		this.sellertel = sellertel;
 	}
 	
 	public void setId(String id)
@@ -54,6 +59,16 @@ public class Sales
 		this.category = category;
 	}
 	
+	public void setSellername(String sellername)
+	{
+		this.sellername = sellername;
+	}
+	
+	public void setSellertel(String sellertel)
+	{
+		this.sellertel = sellertel;
+	}
+	
 	public String getId()
 	{
 		return id;
@@ -84,9 +99,19 @@ public class Sales
 		return category;
 	}
 	
+	public String getSellername()
+	{
+		return sellername;
+	}
+	
+	public String getSellertel()
+	{
+		return sellertel;
+	}
+	
 	public String toString()
 	{
-		return "(" + id + "," + name + "," + category + "," + price + "," + info + "," + imgpath + ")";
+		return "(" + id + "," + name + "," + category + "," + price + "," + info + "," + imgpath + "," + sellername + "," + sellertel + ")";
 	}
 
 }

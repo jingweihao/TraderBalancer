@@ -53,7 +53,8 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
             </clustering:loadDistributor>
        </jaxws:features>
     </jaxws:client>
-
+    
+    
     <jaxws:client id="balancer3" serviceClass = "com.service.AddItem">
        <jaxws:features>
            <clustering:loadDistributor>
@@ -86,7 +87,40 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
                 </clustering:strategy>
             </clustering:loadDistributor>
        </jaxws:features>
-    </jaxws:client>
+    </jaxws:client>    
 
+    <jaxws:client id="balancer5" serviceClass = "com.service.Verify">
+       <jaxws:features>
+           <clustering:loadDistributor>
+                <clustering:strategy>
+                    <bean class="org.apache.cxf.clustering.RandomStrategy">
+				        <property name="alternateAddresses">
+				            <util:list>
+						        <value>http://localhost:8080/TraderService/V</value>
+						        <!-- <value>http://localhost:8010/TraderService/PS</value>  -->
+						    </util:list>
+				        </property>
+				    </bean>
+                </clustering:strategy>
+            </clustering:loadDistributor>
+       </jaxws:features>
+    </jaxws:client>    
+
+    <jaxws:client id="balancer6" serviceClass = "com.service.Register">
+       <jaxws:features>
+           <clustering:loadDistributor>
+                <clustering:strategy>
+                    <bean class="org.apache.cxf.clustering.RandomStrategy">
+				        <property name="alternateAddresses">
+				            <util:list>
+						        <value>http://localhost:8080/TraderService/R</value>
+						        <!-- <value>http://localhost:8010/TraderService/PS</value>  -->
+						    </util:list>
+				        </property>
+				    </bean>
+                </clustering:strategy>
+            </clustering:loadDistributor>
+       </jaxws:features>
+    </jaxws:client>    
 
 </beans>

@@ -8,10 +8,13 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.data.Sales;
 import com.data.SearchResult;
+import com.data.User;
 import com.service.AddItem;
 import com.service.DeleteItem;
 import com.service.PersonalSales;
+import com.service.Register;
 import com.service.Search;
+import com.service.Verify;
 
 @WebService(endpointInterface = "com.getService.GetService", serviceName = "GetService")
 public class GetServiceImpl implements GetService
@@ -44,6 +47,20 @@ public class GetServiceImpl implements GetService
 		DeleteItem di = (DeleteItem)context.getBean("balancer4");
 		System.out.println("balance DeleteItemService~~~~~~");
 		return di.deleteItem(itemid);
+	}
+	
+	public User VerifyService(User user)
+	{
+		Verify vr = (Verify)context.getBean("balancer5");
+		System.out.println("balance VerifyService~~~~~~~~~");
+		return vr.verfiyUser(user);
+	}
+	
+	public boolean RegisterService(User user)
+	{
+		Register rg = (Register)context.getBean("balancer6");
+		System.out.println("balance RegisterService~~~~~~~~");
+		return rg.registerUser(user);
 	}
 
 }
