@@ -12,115 +12,163 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 <!--  <util:list id="ServersList">
         <value>http://localhost:8080/TraderService/S</value>
         <value>http://localhost:8010/TraderService/S</value>
-    </util:list>
+    </util:list> 
+ -->	
      
-    <bean id="RandomAddresses" class="org.apache.cxf.clustering.RandomStrategy">
+     <bean id = "ServerAddress" class = "com.balancer.getlist">
+     	<property name = "addresses">
+		      <util:list>  
+        			<value>http://localhost:8080/TraderService</value>
+        			<value>http://localhost:8081/TraderService</value>
+        			<value>http://localhost:8082/TraderService</value>
+		      </util:list> 
+     	</property>
+     </bean>	
+    
+     <bean id="RandomAddresses" class="com.balancer.LCLoadBalanceStrategy">
         <property name="alternateAddresses">
-            <ref bean="ServersList"/>
+        	<util:list>
+				<value>http://localhost:8080/TraderService/S</value>
+				<value>http://localhost:8081/TraderService/S</value>
+				<value>http://localhost:8082/TraderService/S</value>
+			</util:list>
         </property>
-    </bean>
- -->    
-    <jaxws:client id="balancer1" serviceClass = "com.service.Search">
+     </bean>    
+    
+ 	<bean id = "newloaddistributorfeature" class = "com.balancer.NewLoadDistributorFeature">
+ 		<property name = "strategy">
+			<ref bean = "RandomAddresses"/>
+		</property>
+	</bean>  
+	
+    <jaxws:client id="balancer1" serviceClass =  "com.service.Search">
        <jaxws:features>
-           <clustering:loadDistributor>
-                <clustering:strategy>
-                    <bean class="org.apache.cxf.clustering.RandomStrategy">
-				        <property name="alternateAddresses">
-				            <util:list>
-						        <value>http://localhost:8080/TraderService/S</value>
-						        <!-- <value>http://localhost:8010/TraderService/S</value>  -->
-						    </util:list>
-				        </property>
-				    </bean>
-                </clustering:strategy>
-            </clustering:loadDistributor>
+          <ref bean = "newloaddistributorfeature"/>
        </jaxws:features>
     </jaxws:client>
-
+    
+    
+    
+    <bean id="RandomAddressesPS" class="com.balancer.LCLoadBalanceStrategy">
+       <property name="alternateAddresses">
+       	<util:list>
+			<value>http://localhost:8080/TraderService/PS</value>
+			<value>http://localhost:8081/TraderService/PS</value>
+			<value>http://localhost:8082/TraderService/PS</value>
+		</util:list>
+       </property>
+    </bean>
+     
+    <bean id = "newloaddistributorfeaturePS" class = "com.balancer.NewLoadDistributorFeature">
+ 		<property name = "strategy">
+			<ref bean = "RandomAddressesPS"/>
+		</property>
+	</bean>  
+    
     <jaxws:client id="balancer2" serviceClass = "com.service.PersonalSales">
        <jaxws:features>
-           <clustering:loadDistributor>
-                <clustering:strategy>
-                    <bean class="org.apache.cxf.clustering.RandomStrategy">
-				        <property name="alternateAddresses">
-				            <util:list>
-						        <value>http://localhost:8080/TraderService/PS</value>
-						        <!-- <value>http://localhost:8010/TraderService/PS</value>  -->
-						    </util:list>
-				        </property>
-				    </bean>
-                </clustering:strategy>
-            </clustering:loadDistributor>
+          <ref bean = "newloaddistributorfeaturePS"/>
        </jaxws:features>
     </jaxws:client>
     
     
-    <jaxws:client id="balancer3" serviceClass = "com.service.AddItem">
+    
+    <bean id="RandomAddressesAD" class="com.balancer.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/ADD</value>
+				<value>http://localhost:8081/TraderService/ADD</value>
+				<value>http://localhost:8082/TraderService/ADD</value>
+			</util:list>
+        </property>
+     </bean>    
+    
+ 	<bean id = "newloaddistributorfeatureAD" class = "com.balancer.NewLoadDistributorFeature">
+ 		<property name = "strategy">
+			<ref bean = "RandomAddressesAD"/>
+		</property>
+	</bean>  
+	
+    <jaxws:client id="balancer3" serviceClass =  "com.service.AddItem">
        <jaxws:features>
-           <clustering:loadDistributor>
-                <clustering:strategy>
-                    <bean class="org.apache.cxf.clustering.RandomStrategy">
-				        <property name="alternateAddresses">
-				            <util:list>
-						        <value>http://localhost:8080/TraderService/ADD</value>
-						        <!-- <value>http://localhost:8010/TraderService/PS</value>  -->
-						    </util:list>
-				        </property>
-				    </bean>
-                </clustering:strategy>
-            </clustering:loadDistributor>
+          <ref bean = "newloaddistributorfeatureAD"/>
        </jaxws:features>
     </jaxws:client>
-
-    <jaxws:client id="balancer4" serviceClass = "com.service.DeleteItem">
+    
+    
+    
+    <bean id="RandomAddressesDEL" class="com.balancer.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/DEL</value>
+				<value>http://localhost:8081/TraderService/DEL</value>
+				<value>http://localhost:8082/TraderService/DEL</value>
+			</util:list>
+        </property>
+     </bean>    
+    
+ 	<bean id = "newloaddistributorfeatureDEL" class = "com.balancer.NewLoadDistributorFeature">
+ 		<property name = "strategy">
+			<ref bean = "RandomAddressesDEL"/>
+		</property>
+	</bean>  
+	
+    <jaxws:client id="balancer4" serviceClass =  "com.service.DeleteItem">
        <jaxws:features>
-           <clustering:loadDistributor>
-                <clustering:strategy>
-                    <bean class="org.apache.cxf.clustering.RandomStrategy">
-				        <property name="alternateAddresses">
-				            <util:list>
-						        <value>http://localhost:8080/TraderService/DEL</value>
-						        <!-- <value>http://localhost:8010/TraderService/PS</value>  -->
-						    </util:list>
-				        </property>
-				    </bean>
-                </clustering:strategy>
-            </clustering:loadDistributor>
+          <ref bean = "newloaddistributorfeatureDEL"/>
        </jaxws:features>
-    </jaxws:client>    
-
-    <jaxws:client id="balancer5" serviceClass = "com.service.Verify">
+    </jaxws:client>
+    
+    
+    
+    <bean id="RandomAddressesV" class="com.balancer.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/V</value>
+				<value>http://localhost:8081/TraderService/V</value>
+				<value>http://localhost:8082/TraderService/V</value>
+			</util:list>
+        </property>
+     </bean>    
+    
+ 	<bean id = "newloaddistributorfeatureV" class = "com.balancer.NewLoadDistributorFeature">
+ 		<property name = "strategy">
+			<ref bean = "RandomAddressesV"/>
+		</property>
+	</bean>  
+	
+    <jaxws:client id="balancer5" serviceClass =  "com.service.Verify">
        <jaxws:features>
-           <clustering:loadDistributor>
-                <clustering:strategy>
-                    <bean class="org.apache.cxf.clustering.RandomStrategy">
-				        <property name="alternateAddresses">
-				            <util:list>
-						        <value>http://localhost:8080/TraderService/V</value>
-						        <!-- <value>http://localhost:8010/TraderService/PS</value>  -->
-						    </util:list>
-				        </property>
-				    </bean>
-                </clustering:strategy>
-            </clustering:loadDistributor>
+          <ref bean = "newloaddistributorfeatureV"/>
        </jaxws:features>
-    </jaxws:client>    
-
-    <jaxws:client id="balancer6" serviceClass = "com.service.Register">
+    </jaxws:client>
+    
+    
+    
+    <bean id="RandomAddressesR" class="com.balancer.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/R</value>
+				<value>http://localhost:8081/TraderService/R</value>
+				<value>http://localhost:8082/TraderService/R</value>
+			</util:list>
+        </property>
+     </bean>    
+    
+ 	<bean id = "newloaddistributorfeatureR" class = "com.balancer.NewLoadDistributorFeature">
+ 		<property name = "strategy">
+			<ref bean = "RandomAddressesR"/>
+		</property>
+	</bean>  
+	
+    <jaxws:client id="balancer6" serviceClass =  "com.service.Register">
        <jaxws:features>
-           <clustering:loadDistributor>
-                <clustering:strategy>
-                    <bean class="org.apache.cxf.clustering.RandomStrategy">
-				        <property name="alternateAddresses">
-				            <util:list>
-						        <value>http://localhost:8080/TraderService/R</value>
-						        <!-- <value>http://localhost:8010/TraderService/PS</value>  -->
-						    </util:list>
-				        </property>
-				    </bean>
-                </clustering:strategy>
-            </clustering:loadDistributor>
+          <ref bean = "newloaddistributorfeatureR"/>
        </jaxws:features>
-    </jaxws:client>    
+    </jaxws:client>
+    
+    
+    
+    
 
 </beans>
