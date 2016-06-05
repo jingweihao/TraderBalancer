@@ -19,7 +19,8 @@ import com.service.Verify;
 @WebService(endpointInterface = "com.getService.GetService", serviceName = "GetService")
 public class GetServiceImpl implements GetService
 {
-	private ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"com/balancer/Function.xml"});
+//	private ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"com/balancer/Function.xml"});
+	private ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"com/balancer/LCFunction.xml"});
 	
 	public ArrayList<SearchResult> SearchService(String keyword) 
 	{
@@ -42,11 +43,11 @@ public class GetServiceImpl implements GetService
 		return ai.addItem(sales);
 	}
 	
-	public boolean DeleteItemService(String itemid)
+	public boolean DeleteItemService(String category, String itemname, String itemid)
 	{
 		DeleteItem di = (DeleteItem)context.getBean("balancer4");
 		System.out.println("balance DeleteItemService~~~~~~");
-		return di.deleteItem(itemid);
+		return di.deleteItem(category, itemname, itemid);
 	}
 	
 	public User VerifyService(User user)

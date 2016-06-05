@@ -19,7 +19,8 @@ public class getlistsingleton
 	private static getlistsingleton a = new getlistsingleton();
 	public getlistsingleton()
 	{
-		context = new ClassPathXmlApplicationContext(new String[]{"com/balancer/Function.xml"});
+		//context = new ClassPathXmlApplicationContext(new String[]{"com/balancer/Function.xml"});
+		context = new ClassPathXmlApplicationContext(new String[]{"com/balancer/LCFunction.xml"});
 		serverlist = (getlist)context.getBean("ServerAddress");
 		serverlist.setMap();
 		serverlist.CreateQueue();

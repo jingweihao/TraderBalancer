@@ -17,7 +17,7 @@ public interface GetService
 	
 	public String AddItemService(Sales sales);
 	
-	public boolean DeleteItemService(String itemid);
+	public boolean DeleteItemService(String category, String itemname, String itemid);
 	
 	public User VerifyService(User user);
 	
