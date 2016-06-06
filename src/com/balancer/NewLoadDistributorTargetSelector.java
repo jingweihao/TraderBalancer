@@ -20,11 +20,16 @@ package com.balancer;
 
 import java.util.List;
 import java.util.logging.Logger;
+
+import org.apache.cxf.clustering.FailoverTargetSelector;
 import org.apache.cxf.common.logging.LogUtils;
 import org.apache.cxf.endpoint.Endpoint;
 import org.apache.cxf.message.Exchange;
 import org.apache.cxf.message.Message;
 import org.apache.cxf.transport.Conduit;
+
+import com.balancer.NewFailoverTargetSelector.InvocationContext;
+import com.balancer.NewFailoverTargetSelector.InvocationKey;
 
 /**
  * The LoadDistributorTargetSelector attempts to do the same job as the
@@ -95,7 +100,9 @@ public class NewLoadDistributorTargetSelector extends NewFailoverTargetSelector 
      * @param message
      * @return the Conduit to use for mediation of the message
      */
-    public synchronized Conduit selectConduit(Message message) {
+    public synchronized Conduit selectConduit(Message message) 
+    {
+    	System.out.println("select conduit==========");
         Conduit c = message.get(Conduit.class);
         if (c != null) {
             return c;
@@ -105,7 +112,12 @@ public class NewLoadDistributorTargetSelector extends NewFailoverTargetSelector 
         InvocationContext invocation = inProgress.get(key);
         if ((invocation != null) && !invocation.getContext().containsKey(IS_DISTRIBUTED)) {
             Endpoint target = getDistributionTarget(exchange, invocation);
-            if (target != null) {
+            
+            System.out.println("endpoiint address" + target.getEndpointInfo().getAddress());
+            
+            if (target != null) 
+            {
+            	System.out.println("target != null");
                 setEndpoint(target);
                 message.put(Message.ENDPOINT_ADDRESS, target.getEndpointInfo().getAddress());
                 message.put(CONDUIT_COMPARE_FULL_URL, Boolean.TRUE);
@@ -128,12 +140,17 @@ public class NewLoadDistributorTargetSelector extends NewFailoverTargetSelector 
      * it could be argued that that change should be in the super implementation
      * but I'm not sure of the impact.
      */
+    
     protected Endpoint getFailoverTarget(Exchange exchange,
-                                       InvocationContext invocation) {
+                                       InvocationContext invocation) 
+    {
+    	System.out.println("start load balance getfailovertarget=========");
         List<String> alternateAddresses = null;
-        if (!invocation.hasAlternates()) {
+        if (!invocation.hasAlternates()) 
+        {
             // no previous failover attempt on this invocation
             //
+        	System.out.println("not has alternativer=========");
             alternateAddresses = 
                 getStrategy().getAlternateAddresses(exchange);
             if (alternateAddresses != null) {
@@ -143,25 +160,46 @@ public class NewLoadDistributorTargetSelector extends NewFailoverTargetSelector 
                 invocation.setAlternateEndpoints(
                     getStrategy().getAlternateEndpoints(exchange));
             }
-        } else {
+        }
+        else 
+        {
+        	//¸Ä¸Ä-remove
+        	System.out.println("hasalter=============");
             alternateAddresses = invocation.getAlternateAddresses();
+            System.out.println("has address" + alternateAddresses);    
+            String address = exchange.getEndpoint().getEndpointInfo().getAddress();
+            System.out.println("should remove address:=====" + address);
+            alternateAddresses.remove(address);            
+            System.out.println("after remove:=====" + alternateAddresses);
         }
 
+        
+        System.out.println("starting==============");
         Endpoint failoverTarget = null;
         if (alternateAddresses != null) {
             String alternateAddress = 
                 getStrategy().selectAlternateAddress(alternateAddresses);
-            if (alternateAddress != null) {
+            
+            
+            System.out.println(alternateAddress);
+            
+            
+            if (alternateAddress != null) 
+            {
+            	System.out.println("reusing=============");
                 // re-use current endpoint
                 //
                 failoverTarget = getEndpoint();
 
                 failoverTarget.getEndpointInfo().setAddress(alternateAddress);
             }
-        } else {
+        } else 
+        {
+        	System.out.println("====null=========");
             failoverTarget = getStrategy().selectAlternateEndpoint(
                                  invocation.getAlternateEndpoints());
         }
+        System.out.println("address"+failoverTarget.getEndpointInfo().getAddress());
         return failoverTarget;
     }
 
@@ -173,7 +211,23 @@ public class NewLoadDistributorTargetSelector extends NewFailoverTargetSelector 
      * @return a distribution endpoint if one is available
      */
     private Endpoint getDistributionTarget(Exchange exchange,
-                                           InvocationContext invocation) {
+                                           InvocationContext invocation) 
+    {
+//    	InvocationKey key= new InvocationKey(exchange);
+//    	System.out.println();
+//    	System.out.println("invocationcontext alternateendpoint address==========");
+//    	for(int i = 0; i < invocation.getAlternateEndpoints().size(); i++)
+//    	{
+//    		System.out.println(invocation.getAlternateEndpoints().get(i).getEndpointInfo().getAddress());
+//    	}
+//    	System.out.println("invocationcontext alternative address==========" + invocation.getAlternateAddresses());
+    	
+//    	System.out.println("exchange key hashcode====="+ key.hashCode());
+    	System.out.println("start getdistribute target=========");
+    	
+    	
+    	
+    	
         List<String> alternateAddresses = null;
         if ((addressList == null) || (addressList.isEmpty())) {
             try {
@@ -185,7 +239,11 @@ public class NewLoadDistributorTargetSelector extends NewFailoverTargetSelector 
         }
         alternateAddresses = addressList;
 
-        if ((alternateAddresses == null) || (alternateAddresses.isEmpty())) {
+        System.out.println("alternateaddresses====" + alternateAddresses);
+        
+        if ((alternateAddresses == null) || (alternateAddresses.isEmpty())) 
+        {
+        	System.out.println("alternateaddresses == null");
             alternateAddresses = getStrategy().getAlternateAddresses(exchange);
             if (alternateAddresses != null) {
                 invocation.setAlternateAddresses(alternateAddresses);
@@ -196,18 +254,39 @@ public class NewLoadDistributorTargetSelector extends NewFailoverTargetSelector 
         }
 
         Endpoint distributionTarget = null;
-        if ((alternateAddresses != null) && !alternateAddresses.isEmpty()) {
+        if ((alternateAddresses != null) && !alternateAddresses.isEmpty()) 
+        {
+        	System.out.println("alternateaddresses != null");
             String alternateAddress =
                 getStrategy().selectAlternateAddress(alternateAddresses);
-            if (alternateAddress != null) {
+            
+            System.out.println("selected address -===" + alternateAddress);
+            
+            if (alternateAddress != null) 
+            {
                 // re-use current endpoint
                 distributionTarget = getEndpoint();
                 distributionTarget.getEndpointInfo().setAddress(alternateAddress);
+                System.out.println("now distributionTarget Endpoint address===" + alternateAddress);
+            	
+            	
+                //not reuse endpoint
+//            	Endpoint newendpoint = null;
+//            	newendpoint.getEndpointInfo().setAddress(alternateAddress);
+//            	distributionTarget = newendpoint;
+                
+                
+                
             }
-        } else {
+        } 
+        else 
+        {
             distributionTarget = getStrategy().selectAlternateEndpoint(
                                  invocation.getAlternateEndpoints());
+            System.out.println("else now distributionTarget Endpoint address===" + distributionTarget.getEndpointInfo().getAddress());
         }
+        
+        System.out.println("finnally distributionTarget Endpoint address===" + distributionTarget.getEndpointInfo().getAddress());
         return distributionTarget;
     }
 
@@ -215,5 +294,4 @@ public class NewLoadDistributorTargetSelector extends NewFailoverTargetSelector 
     protected boolean requiresFailover(Exchange exchange, Exception ex) {
         return failover && super.requiresFailover(exchange, ex);
     }
-
 }
