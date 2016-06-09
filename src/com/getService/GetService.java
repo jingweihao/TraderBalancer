@@ -23,8 +23,10 @@ public interface GetService
 	
 	public boolean RegisterService(User user);
 	
-	public String Hello1Service(String person);
+	public String Hello1Service(String person, int ith);
 	
-	public String Hello2Service(String person);
-		
+	public ArrayList<SearchResult> TestSearch(String keyword, int ith);
+	
+	public ArrayList<Sales> TestSales(String username, int ith);
+			
 }
