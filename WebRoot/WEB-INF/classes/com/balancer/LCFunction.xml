@@ -19,8 +19,8 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
      	<property name = "addresses">
 		      <util:list>  
         			<value>http://localhost:8080/TraderService</value>
-        			<value>http://localhost:8081/TraderService</value>
-        			<value>http://localhost:8082/TraderService</value>
+        			<value>http://localhost:8010/TraderService</value>
+        			<!-- <value>http://localhost:8082/TraderService</value>  -->
 		      </util:list> 
      	</property>
      </bean>	
@@ -29,8 +29,8 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
         <property name="alternateAddresses">
         	<util:list>
 				<value>http://localhost:8080/TraderService/S</value>
-				<value>http://localhost:8081/TraderService/S</value>
-				<value>http://localhost:8082/TraderService/S</value>
+				<value>http://localhost:8010/TraderService/S</value>
+				<!-- <value>http://localhost:8082/TraderService/S</value>  -->
 			</util:list>
         </property>
      </bean>    
@@ -53,8 +53,8 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
        <property name="alternateAddresses">
        	<util:list>
 			<value>http://localhost:8080/TraderService/PS</value>
-			<value>http://localhost:8081/TraderService/PS</value>
-			<value>http://localhost:8082/TraderService/PS</value>
+			<value>http://localhost:8010/TraderService/PS</value>
+			<!-- <value>http://localhost:8082/TraderService/PS</value>   -->
 		</util:list>
        </property>
     </bean>
@@ -77,8 +77,8 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
         <property name="alternateAddresses">
         	<util:list>
 				<value>http://localhost:8080/TraderService/ADD</value>
-				<value>http://localhost:8081/TraderService/ADD</value>
-				<value>http://localhost:8082/TraderService/ADD</value>
+				<value>http://localhost:8010/TraderService/ADD</value>
+				<!-- <value>http://localhost:8082/TraderService/ADD</value> -->
 			</util:list>
         </property>
      </bean>    
@@ -101,8 +101,8 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
         <property name="alternateAddresses">
         	<util:list>
 				<value>http://localhost:8080/TraderService/DEL</value>
-				<value>http://localhost:8081/TraderService/DEL</value>
-				<value>http://localhost:8082/TraderService/DEL</value>
+				<value>http://localhost:8010/TraderService/DEL</value>
+				<!-- <value>http://localhost:8082/TraderService/DEL</value> -->
 			</util:list>
         </property>
      </bean>    
@@ -125,8 +125,8 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
         <property name="alternateAddresses">
         	<util:list>
 				<value>http://localhost:8080/TraderService/V</value>
-				<value>http://localhost:8081/TraderService/V</value>
-				<value>http://localhost:8082/TraderService/V</value>
+				<value>http://localhost:8010/TraderService/V</value>
+				<!-- <value>http://localhost:8082/TraderService/V</value> -->
 			</util:list>
         </property>
      </bean>    
@@ -149,8 +149,8 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
         <property name="alternateAddresses">
         	<util:list>
 				<value>http://localhost:8080/TraderService/R</value>
-				<value>http://localhost:8081/TraderService/R</value>
-				<value>http://localhost:8082/TraderService/R</value>
+				<value>http://localhost:8010/TraderService/R</value>
+				<!-- <value>http://localhost:8082/TraderService/R</value> -->
 			</util:list>
         </property>
      </bean>    
@@ -167,6 +167,28 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
        </jaxws:features>
     </jaxws:client>
     
+    
+    <bean id="RandomAddresseshw1" class="com.balancer.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/hw1</value>
+				<value>http://localhost:8010/TraderService/hw1</value>
+				<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
+			</util:list>
+        </property>
+     </bean>    
+    
+ 	<bean id = "newloaddistributorfeaturehw1" class = "com.balancer.NewLoadDistributorFeature">
+ 		<property name = "strategy">
+			<ref bean = "RandomAddresseshw1"/>
+		</property>
+	</bean>  
+	
+    <jaxws:client id="balancer7" serviceClass =  "com.service.Hello1">
+       <jaxws:features>
+          <ref bean = "newloaddistributorfeaturehw1"/>
+       </jaxws:features>
+    </jaxws:client>
     
     
     

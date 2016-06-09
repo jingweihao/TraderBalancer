@@ -11,6 +11,7 @@ import com.data.SearchResult;
 import com.data.User;
 import com.service.AddItem;
 import com.service.DeleteItem;
+import com.service.Hello1;
 import com.service.PersonalSales;
 import com.service.Register;
 import com.service.Search;
@@ -43,11 +44,11 @@ public class GetServiceImpl implements GetService
 		return ai.addItem(sales);
 	}
 	
-	public boolean DeleteItemService(String category, String itemname, String itemid)
+	public boolean DeleteItemService(String category, String itemname, String itemid, String sellername)
 	{
 		DeleteItem di = (DeleteItem)context.getBean("balancer4");
 		System.out.println("balance DeleteItemService~~~~~~");
-		return di.deleteItem(category, itemname, itemid);
+		return di.deleteItem(category, itemname, itemid, sellername);
 	}
 	
 	public User VerifyService(User user)
@@ -62,6 +63,20 @@ public class GetServiceImpl implements GetService
 		Register rg = (Register)context.getBean("balancer6");
 		System.out.println("balance RegisterService~~~~~~~~");
 		return rg.registerUser(user);
+	}
+
+	public String Hello1Service(String person) 
+	{
+		Hello1 h = (Hello1)context.getBean("balancer7");
+		System.out.println("balance Hello1Service~~~~~~~~~");
+		return h.sayHello1(person);
+	}
+
+	public String Hello2Service(String person) 
+	{
+		Hello1 h = (Hello1)context.getBean("balancer7");
+		System.out.println("balance Hello2Service~~~~~~~~~");
+		return h.sayHello2(person);
 	}
 
 }

@@ -17,10 +17,14 @@ public interface GetService
 	
 	public String AddItemService(Sales sales);
 	
-	public boolean DeleteItemService(String category, String itemname, String itemid);
+	public boolean DeleteItemService(String category, String itemname, String itemid, String sellername);
 	
 	public User VerifyService(User user);
 	
 	public boolean RegisterService(User user);
+	
+	public String Hello1Service(String person);
+	
+	public String Hello2Service(String person);
 		
 }

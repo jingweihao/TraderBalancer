@@ -1,4 +1,4 @@
-package com.balancer;
+package com.balancerLL;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -81,21 +81,23 @@ public class getlist
 		this.queue = qu;
 	}
 	
-	public void addconnection(String address)
+	public void addconnection(String address, int num)
 	{
 		int oldvalue = recordconn.get(address);
-		recordconn.put(address, oldvalue+1);
+		recordconn.put(address, oldvalue+num);
 		
-		Servers s = new Servers(address, oldvalue+1);
+		Servers s = new Servers(address, oldvalue+num);
 		queue.add(s);
 		
 		System.out.println("queue context: "+ queue);
 	}
 	
-	public void substractconn(String address)
+	
+	
+	public void substractconn(String address, int num)
 	{
 		int oldvalue = recordconn.get(address);
-		recordconn.put(address, oldvalue-1);
+		recordconn.put(address, oldvalue-num);
 		
 		queue.clear();
 		for(String key: recordconn.keySet())

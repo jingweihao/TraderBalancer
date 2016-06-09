@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package com.balancer;
+package com.balancerLL;
 
 import java.util.List;
 import java.util.Map;
@@ -25,8 +25,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.apache.cxf.clustering.AbstractStaticFailoverStrategy;
-import org.apache.cxf.clustering.FailoverStrategy;
 import org.apache.cxf.clustering.SequentialStrategy;
 import org.apache.cxf.common.logging.LogUtils;
 import org.apache.cxf.common.util.PropertyUtils;
@@ -51,12 +49,12 @@ import org.apache.cxf.transport.Conduit;
 public class NewFailoverTargetSelector extends AbstractConduitSelector {
 
     private static final Logger LOG = LogUtils.getL7dLogger(NewFailoverTargetSelector.class);
-    private static final String COMPLETE_IF_SERVICE_NOT_AVAIL_PROPERTY = 
+    protected static final String COMPLETE_IF_SERVICE_NOT_AVAIL_PROPERTY = 
         "org.apache.cxf.transport.complete_if_service_not_available";
 
     protected ConcurrentHashMap<InvocationKey, InvocationContext> inProgress 
         = new ConcurrentHashMap<InvocationKey, InvocationContext>();
-    protected FailoverStrategy failoverStrategy;
+    protected NewFailoverStrategy failoverStrategy;
     private boolean supportNotAvailableErrorsOnly = true;
     /**
      * Normal constructor.
@@ -135,103 +133,140 @@ public class NewFailoverTargetSelector extends AbstractConduitSelector {
      */
     public void complete(Exchange exchange) 
     {   
-//    	String add = exchange.getEndpoint().getEndpointInfo().getAddress();
-//    	System.out.println("start----------"  + add);
-    	
-    	
+    	System.out.println("start complete==================");
+    	String add = getEndpoint().getEndpointInfo().getAddress();
+    	System.out.println("current exchange endpoint========="  + add);
+      	
         InvocationKey key = new InvocationKey(exchange);
         InvocationContext invocation = getInvocationContext(key);
-        if (invocation == null) {
-        	
-//        	System.out.println("null"+add);
+        
+        
+        // if context is null
+        if (invocation == null) 
+        {	
+        	System.out.println("invocation context is null------"+add);
             super.complete(exchange);
             return;
         }
         
+        // whether this exchange need failover or not
         boolean failover = false;
         final Exception ex = getExceptionIfPresent(exchange);
         if (requiresFailover(exchange, ex))   // need failover
         {
-        	System.out.println("address fail~~~~~~~~~~~~~~");
+        	System.out.println("need failover===========");
         	String address = exchange.getEndpoint().getEndpointInfo().getAddress();
-        	System.out.println("endpoint address:==============" + address);
+        	System.out.println("current endpoint address:==============" + address);
         	
-        	
-        	String server = address.substring(0, address.lastIndexOf('/'));
-        	//System.out.println("server address:========="+server);
 
-        	
-        	getlistsingleton alladdress = getlistsingleton.getInstance();
-        	System.out.println("current record connections:==========");
-        	alladdress.printconn();
-        	alladdress.substractconn(server);
-        	System.out.println("after substract:==========");
-        	alladdress.printqueue();
-        	
-        	System.out.println("now record connections:=========");
-        	alladdress.printconn();
-        	System.out.println();
-
+        	System.out.println("on Failure=======");
             onFailure(invocation, ex);
+            System.out.println("conduit old=======");
             Conduit old = (Conduit)exchange.getOutMessage().remove(Conduit.class.getName());
             
+            System.out.println("after remove conduit then substract");
+        	String server = address.substring(0, address.lastIndexOf('/'));
+//        	System.out.println("server address:========="+server);
+        	getlistsingleton alladdress = getlistsingleton.getInstance();
+        	System.out.println("old record connections:==========");
+        	alladdress.printconn();
+        	
+        	//Least connection sub 1;        	
+//        	alladdress.substractconn(server, 1);
+        	
+        	// Least Load connection sub
+        	
+        	String type = getStrategy().gettype();
+        	System.out.println("type" + type);
+        	
+        	int num = getStrategy().getestimatenum();
+        	alladdress.substractconn(server, num);
+        	
+        	
+//        	System.out.println("after substract:==========");
+//        	alladdress.printqueue();
+        	System.out.println("now record connections:=========");
+        	alladdress.printconn();
+            
+
+            System.out.println("get failoverTarget==========");
             Endpoint failoverTarget = getFailoverTarget(exchange, invocation);
-            if (failoverTarget != null) {
+            
+            System.out.println("if==============");
+            if (failoverTarget != null) 
+            {
+            	System.out.println("failoverTaget != null");
                 setEndpoint(failoverTarget);
                 removeConduit(old);
+                System.out.println("performfailover===========");
                 failover = performFailover(exchange, invocation);
-            } else {
+                System.out.println("failover:======" + failover);
+            } 
+            else 
+            {
+            	System.out.println("failoverTarget == null");
                 exchange.remove(COMPLETE_IF_SERVICE_NOT_AVAIL_PROPERTY);
                 setOriginalEndpoint(invocation);
             }
-        } 
+        }
         else  // no need failover
         {
+        	System.out.println("no need failover========");
             getLogger().fine("FAILOVER_NOT_REQUIRED");
             onSuccess(invocation);
         }
         
+        System.out.println("failover or not=====" + failover);
+        
         if (!failover) 
         {
             inProgress.remove(key);
-            String address = key.exchange.getEndpoint().getEndpointInfo().getAddress();
+            doComplete(exchange);
             
-        	System.out.println("do complete");
+            
+            System.out.println("do complete is over");
+//            String address = key.exchange.getEndpoint().getEndpointInfo().getAddress();
 //        	String address = exchange.getEndpoint().getEndpointInfo().getAddress();
-        	System.out.println("endpoint address:==============" + address);
-        	
-        	
+            String address = getEndpoint().getEndpointInfo().getAddress();
+        	System.out.println("endpoint address:==============" + address);      	
         	String server = address.substring(0, 35);
-        	//System.out.println("server address:========="+ server);
-
-        	
+        	System.out.println("server address:========="+ server);      	
         	getlistsingleton alladdress = getlistsingleton.getInstance();
-        	System.out.println("current record connections:===========");
+        	System.out.println("old record connections:===========");
         	alladdress.printconn();
-        	alladdress.substractconn(server);
+        	
+        	//Least connection sub 1;        	
+//        	alladdress.substractconn(server, 1);
+        	
+        	// Least Load connection sub
+        	
+        	String type = getStrategy().gettype();
+        	System.out.println("type" + type);
+        	
+        	int num = getStrategy().getestimatenum();
+        	alladdress.substractconn(server, num);
+        	
+        	
         	System.out.println("after substract:==========");
         	alladdress.printqueue();
-        	
-        	
         	System.out.println("now record connections:=========");
         	alladdress.printconn();
         	System.out.println();
-            
-            
-            doComplete(exchange);
         }
     }
     
     protected void doComplete(Exchange exchange) 
-    {    	
-        super.complete(exchange);
+    {
+    	super.complete(exchange);
     }
     
     protected void setOriginalEndpoint(InvocationContext invocation) {
         setEndpoint(invocation.retrieveOriginalEndpoint(endpoint));
     }
     
-    protected boolean performFailover(Exchange exchange, InvocationContext invocation) {
+    protected boolean performFailover(Exchange exchange, InvocationContext invocation) 
+    {
+    	System.out.println("start performfailover==================");
         Exception prevExchangeFault = (Exception)exchange.remove(Exception.class.getName());
         Message outMessage = exchange.getOutMessage();
         Exception prevMessageFault = outMessage.getContent(Exception.class);
@@ -241,18 +276,25 @@ public class NewFailoverTargetSelector extends AbstractConduitSelector {
         Retryable retry = exchange.get(Retryable.class);
         exchange.clear();
         boolean failover = false;
-        if (retry != null) {
-            try {
+        if (retry != null) 
+        {
+            try 
+            {
                 failover = true;
                 long delay = getDelayBetweenRetries();
-                if (delay > 0) {
+                if (delay > 0) 
+                {
                     Thread.sleep(delay);
                 }
+                System.out.println("start invoke============");
                 retry.invoke(invocation.getBindingOperationInfo(),
                              invocation.getParams(),
                              invocation.getContext(),
                              exchange);
-            } catch (Exception e) {
+                System.out.println("end invoke================");
+            } 
+            catch (Exception e) 
+            {
                 if (exchange.get(Exception.class) != null) {
                     exchange.put(Exception.class, prevExchangeFault);
                 }
@@ -277,7 +319,7 @@ public class NewFailoverTargetSelector extends AbstractConduitSelector {
     /**
      * @param strategy the FailoverStrategy to use
      */
-    public synchronized void setStrategy(FailoverStrategy strategy) {
+    public synchronized void setStrategy(NewFailoverStrategy strategy) {
         if (strategy != null) {
             getLogger().log(Level.INFO, "USING_STRATEGY", new Object[] {strategy});
             failoverStrategy = strategy;
@@ -287,9 +329,9 @@ public class NewFailoverTargetSelector extends AbstractConduitSelector {
     /**
      * @return strategy the FailoverStrategy to use
      */    
-    public synchronized FailoverStrategy getStrategy()  {
+    public synchronized NewFailoverStrategy getStrategy()  {
         if (failoverStrategy == null) {
-            failoverStrategy = new SequentialStrategy();
+            failoverStrategy = new LCLoadBalanceStrategy();
             getLogger().log(Level.INFO,
                             "USING_STRATEGY",
                             new Object[] {failoverStrategy});
@@ -309,9 +351,9 @@ public class NewFailoverTargetSelector extends AbstractConduitSelector {
      * @return delay, 0 means no delay
      */
     protected long getDelayBetweenRetries() {
-        FailoverStrategy strategy = getStrategy();
-        if (strategy instanceof AbstractStaticFailoverStrategy) {
-            return ((AbstractStaticFailoverStrategy)strategy).getDelayBetweenRetries();
+        NewFailoverStrategy strategy = getStrategy();
+        if (strategy instanceof NewAbstractStaticFailoverStrategy) {
+            return ((NewAbstractStaticFailoverStrategy)strategy).getDelayBetweenRetries();
         }
         //perhaps supporting FailoverTargetSelector specific property can make sense too
         return 0;
@@ -346,7 +388,7 @@ public class NewFailoverTargetSelector extends AbstractConduitSelector {
         return failover;
     }
 
-    private Exception getExceptionIfPresent(Exchange exchange) {
+    protected Exception getExceptionIfPresent(Exchange exchange) {
         Message outMessage = exchange.getOutMessage();
         Exception ex = outMessage.get(Exception.class) != null
                        ? outMessage.get(Exception.class)
@@ -362,10 +404,20 @@ public class NewFailoverTargetSelector extends AbstractConduitSelector {
      * @return a failover endpoint if one is available
      */
     protected Endpoint getFailoverTarget(Exchange exchange,
-                                       InvocationContext invocation) {
+                                       InvocationContext invocation) 
+    {
+    	System.out.println("start getFailoverTarget============");
         List<String> alternateAddresses = updateContextAlternatives(exchange, invocation);
+        
+        System.out.println("updateContextAlternatives=========");
+        System.out.println(alternateAddresses);
+        
         Endpoint failoverTarget = null;
-        if (alternateAddresses != null) {
+        if (alternateAddresses != null) 
+        {
+        	System.out.println("!!!!!null====================");
+        	
+        	
             String alternateAddress = 
                 getStrategy().selectAlternateAddress(alternateAddresses);
             if (alternateAddress != null) {
@@ -375,10 +427,20 @@ public class NewFailoverTargetSelector extends AbstractConduitSelector {
 
                 failoverTarget.getEndpointInfo().setAddress(alternateAddress);
             }
-        } else {
+        } 
+        else 
+        {
+        	System.out.println("null=====================");
+        	
+        	
             failoverTarget = getStrategy().selectAlternateEndpoint(
                                  invocation.getAlternateEndpoints());
         }
+        
+        
+        System.out.println("failoverTarget===========");
+        System.out.println(failoverTarget.getEndpointInfo().getAddress());
+        
         return failoverTarget;
     }
 
@@ -390,19 +452,29 @@ public class NewFailoverTargetSelector extends AbstractConduitSelector {
      * @return alternative addresses
      */
     protected List<String> updateContextAlternatives(Exchange exchange, InvocationContext invocation) {
+    	System.out.println("start update============");
         List<String> alternateAddresses = null;
         if (!invocation.hasAlternates()) {
             // no previous failover attempt on this invocation
             //
+        	System.out.println("no previous failover attempt on this invocation==========");
+        	
+        	
             alternateAddresses = 
                 getStrategy().getAlternateAddresses(exchange);
-            if (alternateAddresses != null) {
+            if (alternateAddresses != null) 
+            {
+            	System.out.println("11111111111==============");
                 invocation.setAlternateAddresses(alternateAddresses);
-            } else {
+            } 
+            else {
+            	System.out.println("222222222222==============");
                 invocation.setAlternateEndpoints(
                     getStrategy().getAlternateEndpoints(exchange));
             }
-        } else {
+        } else 
+        {
+        	System.out.println("previous failover attempt on this invocation========");
             alternateAddresses = invocation.getAlternateAddresses();
         }
         return alternateAddresses;
@@ -477,7 +549,7 @@ public class NewFailoverTargetSelector extends AbstractConduitSelector {
      * an invocation.
      */
     protected static class InvocationKey {
-        private Exchange exchange;
+        Exchange exchange;
         
         InvocationKey(Exchange ex) {
             exchange = ex;     
