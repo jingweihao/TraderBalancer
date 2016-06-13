@@ -21,6 +21,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/S</value>
 							        <value>http://localhost:8010/TraderService/S</value>
+							        <value>http://localhost:8020/TraderService/S</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -38,6 +39,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/PS</value>
 							        <value>http://localhost:8010/TraderService/PS</value>
+							        <value>http://localhost:8020/TraderService/PS</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -55,6 +57,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/ADD</value>
 							        <value>http://localhost:8010/TraderService/ADD</value>
+							        <value>http://localhost:8020/TraderService/ADD</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -72,6 +75,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/DEL</value>
 							        <value>http://localhost:8010/TraderService/DEL</value>
+							        <value>http://localhost:8020/TraderService/DEL</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -89,6 +93,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/V</value>
 							        <value>http://localhost:8010/TraderService/V</value>
+							        <value>http://localhost:8020/TraderService/V</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -106,6 +111,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/R</value>
 							        <value>http://localhost:8010/TraderService/R</value>
+							        <value>http://localhost:8020/TraderService/R</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -124,6 +130,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/hw1</value>
 							        <value>http://localhost:8010/TraderService/hw1</value>
+							        <value>http://localhost:8020/TraderService/hw1</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -141,6 +148,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/hw2</value>
 							        <value>http://localhost:8010/TraderService/hw2</value>
+							        <value>http://localhost:8020/TraderService/hw2</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -158,6 +166,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/hw3</value>
 							        <value>http://localhost:8010/TraderService/hw3</value>
+							        <value>http://localhost:8020/TraderService/hw3</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -175,6 +184,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/hw4</value>
 							        <value>http://localhost:8010/TraderService/hw4</value>
+							        <value>http://localhost:8020/TraderService/hw4</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -192,6 +202,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/hw5</value>
 							        <value>http://localhost:8010/TraderService/hw5</value>
+							        <value>http://localhost:8020/TraderService/hw5</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -209,6 +220,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/hw6</value>
 							        <value>http://localhost:8010/TraderService/hw6</value>
+							        <value>http://localhost:8020/TraderService/hw6</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -226,6 +238,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/hw7</value>
 							        <value>http://localhost:8010/TraderService/hw7</value>
+							        <value>http://localhost:8020/TraderService/hw7</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -243,6 +256,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/hw8</value>
 							        <value>http://localhost:8010/TraderService/hw8</value>
+							        <value>http://localhost:8020/TraderService/hw8</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -260,6 +274,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/hw9</value>
 							        <value>http://localhost:8010/TraderService/hw9</value>
+							        <value>http://localhost:8020/TraderService/hw9</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -277,6 +292,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/hw10</value>
 							        <value>http://localhost:8010/TraderService/hw10</value>
+							        <value>http://localhost:8020/TraderService/hw10</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -294,6 +310,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/S1</value>
 							        <value>http://localhost:8010/TraderService/S1</value>
+							        <value>http://localhost:8020/TraderService/S1</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -311,6 +328,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/S2</value>
 							        <value>http://localhost:8010/TraderService/S2</value>
+							        <value>http://localhost:8020/TraderService/S2</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -328,6 +346,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/S3</value>
 							        <value>http://localhost:8010/TraderService/S3</value>
+							        <value>http://localhost:8020/TraderService/S3</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -345,6 +364,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/S4</value>
 							        <value>http://localhost:8010/TraderService/S4</value>
+							        <value>http://localhost:8020/TraderService/S4</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -362,6 +382,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/S5</value>
 							        <value>http://localhost:8010/TraderService/S5</value>
+							        <value>http://localhost:8020/TraderService/S5</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -379,6 +400,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/S6</value>
 							        <value>http://localhost:8010/TraderService/S6</value>
+							        <value>http://localhost:8020/TraderService/S6</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -396,6 +418,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/S7</value>
 							        <value>http://localhost:8010/TraderService/S7</value>
+							        <value>http://localhost:8020/TraderService/S7</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -413,6 +436,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/S8</value>
 							        <value>http://localhost:8010/TraderService/S8</value>
+							        <value>http://localhost:8020/TraderService/S8</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -430,6 +454,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/S9</value>
 							        <value>http://localhost:8010/TraderService/S9</value>
+							        <value>http://localhost:8020/TraderService/S9</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -447,6 +472,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/S10</value>
 							        <value>http://localhost:8010/TraderService/S10</value>
+							        <value>http://localhost:8020/TraderService/S10</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -464,6 +490,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/PS1</value>
 							        <value>http://localhost:8010/TraderService/PS1</value>
+							        <value>http://localhost:8020/TraderService/PS1</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -481,6 +508,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/PS2</value>
 							        <value>http://localhost:8010/TraderService/PS2</value>
+							        <value>http://localhost:8020/TraderService/PS2</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -498,6 +526,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/PS3</value>
 							        <value>http://localhost:8010/TraderService/PS3</value>
+							        <value>http://localhost:8020/TraderService/PS3</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -515,6 +544,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/PS4</value>
 							        <value>http://localhost:8010/TraderService/PS4</value>
+							        <value>http://localhost:8020/TraderService/PS4</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -532,6 +562,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/PS5</value>
 							        <value>http://localhost:8010/TraderService/PS5</value>
+							        <value>http://localhost:8020/TraderService/PS5</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -549,6 +580,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/PS6</value>
 							        <value>http://localhost:8010/TraderService/PS6</value>
+							        <value>http://localhost:8020/TraderService/PS6</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -566,6 +598,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/PS7</value>
 							        <value>http://localhost:8010/TraderService/PS7</value>
+							        <value>http://localhost:8020/TraderService/PS7</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -583,6 +616,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/PS8</value>
 							        <value>http://localhost:8010/TraderService/PS8</value>
+							        <value>http://localhost:8020/TraderService/PS8</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -600,6 +634,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/PS9</value>
 							        <value>http://localhost:8010/TraderService/PS9</value>
+							        <value>http://localhost:8020/TraderService/PS9</value>
 							    </util:list>
 				        </property>
 				    </bean>                    
@@ -617,6 +652,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				                <util:list>
 							        <value>http://localhost:8080/TraderService/PS10</value>
 							        <value>http://localhost:8010/TraderService/PS10</value>
+							        <value>http://localhost:8020/TraderService/PS10</value>
 							    </util:list>
 				        </property>
 				    </bean>                    

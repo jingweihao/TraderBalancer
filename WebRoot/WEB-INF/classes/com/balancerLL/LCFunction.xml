@@ -15,17 +15,17 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     </util:list> 
  -->	
      
-     <bean id = "ServerAddress" class = "com.balancer.getlist">
+     <bean id = "ServerAddress" class = "com.balancerLL.getlist">
      	<property name = "addresses">
 		      <util:list>  
         			<value>http://localhost:8080/TraderService</value>
         			<value>http://localhost:8010/TraderService</value>
-        			<!-- <value>http://localhost:8082/TraderService</value> -->
+        			<value>http://localhost:8020/TraderService</value>
 		      </util:list> 
      	</property>
      </bean>	
     
-     <bean id="RandomAddresses" class="com.balancer.LCLoadBalanceStrategy">
+     <bean id="RandomAddresses" class="com.balancerLL.LCLoadBalanceStrategy">
         <property name="alternateAddresses">
         	<util:list>
 				<value>http://localhost:8080/TraderService/S</value>
@@ -35,7 +35,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
         </property>
      </bean>    
     
- 	<bean id = "newloaddistributorfeature" class = "com.balancer.NewLoadDistributorFeature">
+ 	<bean id = "newloaddistributorfeature" class = "com.balancerLL.NewLoadDistributorFeature">
  		<property name = "strategy">
 			<ref bean = "RandomAddresses"/>
 		</property>
@@ -49,7 +49,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     
     
     
-    <bean id="RandomAddressesPS" class="com.balancer.LCLoadBalanceStrategy">
+    <bean id="RandomAddressesPS" class="com.balancerLL.LCLoadBalanceStrategy">
        <property name="alternateAddresses">
        	<util:list>
 			<value>http://localhost:8080/TraderService/PS</value>
@@ -59,7 +59,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
        </property>
     </bean>
      
-    <bean id = "newloaddistributorfeaturePS" class = "com.balancer.NewLoadDistributorFeature">
+    <bean id = "newloaddistributorfeaturePS" class = "com.balancerLL.NewLoadDistributorFeature">
  		<property name = "strategy">
 			<ref bean = "RandomAddressesPS"/>
 		</property>
@@ -74,7 +74,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     
     
     
-    <bean id="RandomAddressesAD" class="com.balancer.LCLoadBalanceStrategy">
+    <bean id="RandomAddressesAD" class="com.balancerLL.LCLoadBalanceStrategy">
         <property name="alternateAddresses">
         	<util:list>
 				<value>http://localhost:8080/TraderService/ADD</value>
@@ -84,7 +84,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
         </property>
      </bean>    
     
- 	<bean id = "newloaddistributorfeatureAD" class = "com.balancer.NewLoadDistributorFeature">
+ 	<bean id = "newloaddistributorfeatureAD" class = "com.balancerLL.NewLoadDistributorFeature">
  		<property name = "strategy">
 			<ref bean = "RandomAddressesAD"/>
 		</property>
@@ -98,7 +98,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     
     
     
-    <bean id="RandomAddressesDEL" class="com.balancer.LCLoadBalanceStrategy">
+    <bean id="RandomAddressesDEL" class="com.balancerLL.LCLoadBalanceStrategy">
         <property name="alternateAddresses">
         	<util:list>
 				<value>http://localhost:8080/TraderService/DEL</value>
@@ -108,7 +108,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
         </property>
      </bean>    
     
- 	<bean id = "newloaddistributorfeatureDEL" class = "com.balancer.NewLoadDistributorFeature">
+ 	<bean id = "newloaddistributorfeatureDEL" class = "com.balancerLL.NewLoadDistributorFeature">
  		<property name = "strategy">
 			<ref bean = "RandomAddressesDEL"/>
 		</property>
@@ -122,7 +122,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     
     
     
-    <bean id="RandomAddressesV" class="com.balancer.LCLoadBalanceStrategy">
+    <bean id="RandomAddressesV" class="com.balancerLL.LCLoadBalanceStrategy">
         <property name="alternateAddresses">
         	<util:list>
 				<value>http://localhost:8080/TraderService/V</value>
@@ -132,7 +132,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
         </property>
      </bean>    
     
- 	<bean id = "newloaddistributorfeatureV" class = "com.balancer.NewLoadDistributorFeature">
+ 	<bean id = "newloaddistributorfeatureV" class = "com.balancerLL.NewLoadDistributorFeature">
  		<property name = "strategy">
 			<ref bean = "RandomAddressesV"/>
 		</property>
@@ -146,7 +146,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     
     
     
-    <bean id="RandomAddressesR" class="com.balancer.LCLoadBalanceStrategy">
+    <bean id="RandomAddressesR" class="com.balancerLL.LCLoadBalanceStrategy">
         <property name="alternateAddresses">
         	<util:list>
 				<value>http://localhost:8080/TraderService/R</value>
@@ -156,7 +156,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
         </property>
      </bean>    
     
- 	<bean id = "newloaddistributorfeatureR" class = "com.balancer.NewLoadDistributorFeature">
+ 	<bean id = "newloaddistributorfeatureR" class = "com.balancerLL.NewLoadDistributorFeature">
  		<property name = "strategy">
 			<ref bean = "RandomAddressesR"/>
 		</property>
@@ -172,542 +172,582 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     </jaxws:client>
     
 <!-- testing -->	
+    <bean id="RandomH1" class="com.balancerLL.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/hw1</value>
+				<value>http://localhost:8010/TraderService/hw1</value>
+				<value>http://localhost:8020/TraderService/hw1</value>
+			</util:list>
+        </property>
+    </bean>
     <jaxws:client id="balancer7" serviceClass =  "com.service.Hello1">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/hw1</value>
-								<value>http://localhost:8010/TraderService/hw1</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					<ref bean = "RandomH1"/>
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>
     
+    
+    <bean id="RandomH2" class="com.balancerLL.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/hw2</value>
+				<value>http://localhost:8010/TraderService/hw2</value>
+				<value>http://localhost:8020/TraderService/hw2</value>
+			</util:list>
+        </property>
+    </bean>
     <jaxws:client id="balancer8" serviceClass =  "com.service.Hello1">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/hw2</value>
-								<value>http://localhost:8010/TraderService/hw2</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					<ref bean = "RandomH2"/>
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>
 
+
+    <bean id="RandomH3" class="com.balancerLL.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/hw3</value>
+				<value>http://localhost:8010/TraderService/hw3</value>
+				<value>http://localhost:8020/TraderService/hw3</value>
+			</util:list>
+        </property>
+    </bean>
     <jaxws:client id="balancer9" serviceClass =  "com.service.Hello1">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/hw3</value>
-								<value>http://localhost:8010/TraderService/hw3</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					<ref bean = "RandomH3"/>
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>    
 
+
+    <bean id="RandomH4" class="com.balancerLL.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/hw4</value>
+				<value>http://localhost:8010/TraderService/hw4</value>
+				<value>http://localhost:8020/TraderService/hw4</value>
+			</util:list>
+        </property>
+    </bean>
     <jaxws:client id="balancer10" serviceClass =  "com.service.Hello1">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/hw4</value>
-								<value>http://localhost:8010/TraderService/hw4</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					<ref bean = "RandomH4"/>
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>
     
+    <bean id="RandomH5" class="com.balancerLL.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/hw5</value>
+				<value>http://localhost:8010/TraderService/hw5</value>
+				<value>http://localhost:8020/TraderService/hw5</value>
+			</util:list>
+        </property>
+    </bean>
     <jaxws:client id="balancer11" serviceClass =  "com.service.Hello1">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/hw5</value>
-								<value>http://localhost:8010/TraderService/hw5</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					<ref bean = "RandomH5"/>
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>
 
+    <bean id="RandomH6" class="com.balancerLL.LCLoadBalanceStrategy">
+       <property name="alternateAddresses">
+       	<util:list>
+			<value>http://localhost:8080/TraderService/hw6</value>
+			<value>http://localhost:8010/TraderService/hw6</value>
+			<value>http://localhost:8020/TraderService/hw6</value>
+		</util:list>
+       </property>
+   </bean>
     <jaxws:client id="balancer12" serviceClass =  "com.service.Hello1">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/hw6</value>
-								<value>http://localhost:8010/TraderService/hw6</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					<ref bean = "RandomH6"/>
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>
 
+    <bean id="RandomH7" class="com.balancerLL.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/hw7</value>
+				<value>http://localhost:8010/TraderService/hw7</value>
+				<value>http://localhost:8020/TraderService/hw7</value>
+			</util:list>
+        </property>
+    </bean>
     <jaxws:client id="balancer13" serviceClass =  "com.service.Hello1">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/hw7</value>
-								<value>http://localhost:8010/TraderService/hw7</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					<ref bean = "RandomH7"/>
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>    
     
+    <bean id="RandomH8" class="com.balancerLL.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/hw8</value>
+				<value>http://localhost:8010/TraderService/hw8</value>
+				<value>http://localhost:8020/TraderService/hw8</value>
+			</util:list>
+        </property>
+    </bean>
     <jaxws:client id="balancer14" serviceClass =  "com.service.Hello1">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/hw8</value>
-								<value>http://localhost:8010/TraderService/hw8</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					<ref bean = "RandomH8"/>
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>    
 
+
+    <bean id="RandomH9" class="com.balancerLL.LCLoadBalanceStrategy">
+       <property name="alternateAddresses">
+       	<util:list>
+			<value>http://localhost:8080/TraderService/hw9</value>
+			<value>http://localhost:8010/TraderService/hw9</value>
+			<value>http://localhost:8020/TraderService/hw9</value>
+		</util:list>
+       </property>
+   </bean>
     <jaxws:client id="balancer15" serviceClass =  "com.service.Hello1">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/hw9</value>
-								<value>http://localhost:8010/TraderService/hw9</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					<ref bean = "RandomH9"/>
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>    
 
+    <bean id="RandomH10"  class="com.balancerLL.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/hw10</value>
+				<value>http://localhost:8010/TraderService/hw10</value>
+				<value>http://localhost:8020/TraderService/hw10</value>
+			</util:list>
+        </property>
+    </bean>
     <jaxws:client id="balancer16" serviceClass =  "com.service.Hello1">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/hw10</value>
-								<value>http://localhost:8010/TraderService/hw10</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					<ref bean = "RandomH10"/>
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>    
 
 
+    <bean id="RandomS1" class="com.balancerLL.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/S1</value>
+				<value>http://localhost:8010/TraderService/S1</value>
+				<value>http://localhost:8020/TraderService/S1</value>
+			</util:list>
+        </property>
+    </bean>
     <jaxws:client id="balancer17" serviceClass =  "com.service.Search">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean id="RandomS1" class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/S1</value>
-								<value>http://localhost:8010/TraderService/S1</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					<ref bean = "RandomS1"/>
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>    
 
+
+    <bean id="RandomS2" class="com.balancerLL.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/S2</value>
+				<value>http://localhost:8010/TraderService/S2</value>
+				<value>http://localhost:8020/TraderService/S2</value>
+			</util:list>
+        </property>
+    </bean>
     <jaxws:client id="balancer18" serviceClass =  "com.service.Search">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean id="RandomS2" class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/S2</value>
-								<value>http://localhost:8010/TraderService/S2</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					<ref bean = "RandomS2"/>
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>    
 
+    <bean id="RandomS3" class="com.balancerLL.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/S3</value>
+				<value>http://localhost:8010/TraderService/S3</value>
+				<value>http://localhost:8020/TraderService/S3</value>
+			</util:list>
+        </property>
+    </bean>
     <jaxws:client id="balancer19" serviceClass =  "com.service.Search">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean id="RandomS3" class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/S3</value>
-								<value>http://localhost:8010/TraderService/S3</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					<ref bean = "RandomS3" />
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>    
 
+
+    <bean id="RandomS4" class="com.balancerLL.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/S4</value>
+				<value>http://localhost:8010/TraderService/S4</value>
+				<value>http://localhost:8020/TraderService/S4</value>
+			</util:list>
+        </property>
+    </bean>
     <jaxws:client id="balancer20" serviceClass =  "com.service.Search">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean id="RandomS4" class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/S4</value>
-								<value>http://localhost:8010/TraderService/S4</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					<ref bean = "RandomS4" />
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>    
 
+
+    <bean id="RandomS5" class="com.balancerLL.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/S5</value>
+				<value>http://localhost:8010/TraderService/S5</value>
+				<value>http://localhost:8020/TraderService/S5</value>
+			</util:list>
+        </property>
+    </bean>
     <jaxws:client id="balancer21" serviceClass =  "com.service.Search">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean id="RandomS5" class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/S5</value>
-								<value>http://localhost:8010/TraderService/S5</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					<ref bean = "RandomS5" />
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>    
 
+    <bean id="RandomS6" class="com.balancerLL.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/S6</value>
+				<value>http://localhost:8010/TraderService/S6</value>
+				<value>http://localhost:8020/TraderService/S6</value>
+			</util:list>
+        </property>
+    </bean>
     <jaxws:client id="balancer22" serviceClass =  "com.service.Search">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean id="RandomS6" class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/S6</value>
-								<value>http://localhost:8010/TraderService/S6</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					<ref bean = "RandomS6" />
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>    
 
+
+<bean id="RandomS7" class="com.balancerLL.LCLoadBalanceStrategy">
+       <property name="alternateAddresses">
+       	<util:list>
+			<value>http://localhost:8080/TraderService/S7</value>
+			<value>http://localhost:8010/TraderService/S7</value>
+			<value>http://localhost:8020/TraderService/S7</value>
+		</util:list>
+       </property>
+   </bean>
     <jaxws:client id="balancer23" serviceClass =  "com.service.Search">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean id="RandomS7" class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/S7</value>
-								<value>http://localhost:8010/TraderService/S7</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					 <ref bean = "RandomS7" />
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>    
 
+	<bean id="RandomS8" class="com.balancerLL.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/S8</value>
+				<value>http://localhost:8010/TraderService/S8</value>
+				<value>http://localhost:8020/TraderService/S8</value>
+			</util:list>
+        </property>
+    </bean>
     <jaxws:client id="balancer24" serviceClass =  "com.service.Search">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean id="RandomS8" class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/S8</value>
-								<value>http://localhost:8010/TraderService/S8</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+		 		     <ref bean = "RandomS8" />
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>    
 
+<bean id="RandomS9" class="com.balancerLL.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/S9</value>
+				<value>http://localhost:8010/TraderService/S9</value>
+				<value>http://localhost:8020/TraderService/S9</value>
+			</util:list>
+        </property>
+    </bean>
     <jaxws:client id="balancer25" serviceClass =  "com.service.Search">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean id="RandomS9" class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/S9</value>
-								<value>http://localhost:8010/TraderService/S9</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					<ref bean = "RandomS9" />
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>    
 
+<bean id="RandomS10" class="com.balancerLL.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/S10</value>
+				<value>http://localhost:8010/TraderService/S10</value>
+				<value>http://localhost:8020/TraderService/S10</value>
+			</util:list>
+        </property>
+    </bean>
     <jaxws:client id="balancer26" serviceClass =  "com.service.Search">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean id="RandomS10" class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/S10</value>
-								<value>http://localhost:8010/TraderService/S10</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					 <ref bean = "RandomS10" />
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>    
 
+<bean id="RandomPS1" class="com.balancerLL.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/PS1</value>
+				<value>http://localhost:8010/TraderService/PS1</value>
+				<value>http://localhost:8020/TraderService/PS1</value>
+			</util:list>
+        </property>
+    </bean>
     <jaxws:client id="balancer27" serviceClass =  "com.service.PersonalSales">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean id="RandomPS1" class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/PS1</value>
-								<value>http://localhost:8010/TraderService/PS1</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					 <ref bean = "RandomPS1"/>
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>    
 
+    <bean id="RandomPS2" class="com.balancerLL.LCLoadBalanceStrategy">
+       <property name="alternateAddresses">
+       	<util:list>
+			<value>http://localhost:8080/TraderService/PS2</value>
+			<value>http://localhost:8010/TraderService/PS2</value>
+			<value>http://localhost:8020/TraderService/PS2</value>
+		</util:list>
+       </property>
+   </bean>
     <jaxws:client id="balancer28" serviceClass =  "com.service.PersonalSales">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean id="RandomPS2" class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/PS2</value>
-								<value>http://localhost:8010/TraderService/PS2</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					<ref bean = "RandomPS2"/>
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>    
 
+<bean id="RandomPS3" class="com.balancerLL.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/PS3</value>
+				<value>http://localhost:8010/TraderService/PS3</value>
+				<value>http://localhost:8020/TraderService/PS3</value>
+			</util:list>
+        </property>
+    </bean>
     <jaxws:client id="balancer29" serviceClass =  "com.service.PersonalSales">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean id="RandomPS3" class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/PS3</value>
-								<value>http://localhost:8010/TraderService/PS3</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					<ref bean = "RandomPS3" />
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>    
-
+    
+    
+	<bean id="RandomPS4" class="com.balancerLL.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/PS4</value>
+				<value>http://localhost:8010/TraderService/PS4</value>
+				<value>http://localhost:8020/TraderService/PS4</value>
+			</util:list>
+        </property>
+    </bean>
     <jaxws:client id="balancer30" serviceClass =  "com.service.PersonalSales">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean id="RandomPS4" class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/PS4</value>
-								<value>http://localhost:8010/TraderService/PS4</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+		 		     <ref bean = "RandomPS4"/>
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>    
 
+<bean id="RandomPS5" class="com.balancerLL.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/PS5</value>
+				<value>http://localhost:8010/TraderService/PS5</value>
+				<value>http://localhost:8020/TraderService/PS5</value>
+			</util:list>
+        </property>
+    </bean>
     <jaxws:client id="balancer31" serviceClass =  "com.service.PersonalSales">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean id="RandomPS5" class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/PS5</value>
-								<value>http://localhost:8010/TraderService/PS5</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					 <ref bean = "RandomPS5"/>
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>    
 
+<bean id="RandomPS6" class="com.balancerLL.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/PS6</value>
+				<value>http://localhost:8010/TraderService/PS6</value>
+				<value>http://localhost:8020/TraderService/PS6</value>
+			</util:list>
+        </property>
+    </bean>
     <jaxws:client id="balancer32" serviceClass =  "com.service.PersonalSales">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean id="RandomPS6" class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/PS6</value>
-								<value>http://localhost:8010/TraderService/PS6</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					<ref bean = "RandomPS6"/>
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>    
 
+
+<bean id="RandomPS7" class="com.balancerLL.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/PS7</value>
+				<value>http://localhost:8010/TraderService/PS7</value>
+				<value>http://localhost:8020/TraderService/PS7</value>
+			</util:list>
+        </property>
+    </bean>
     <jaxws:client id="balancer33" serviceClass =  "com.service.PersonalSales">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean id="RandomPS7" class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/PS7</value>
-								<value>http://localhost:8010/TraderService/PS7</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					 <ref bean = "RandomPS7"/>
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>    
 
+<bean id="RandomPS8" class="com.balancerLL.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/PS8</value>
+				<value>http://localhost:8010/TraderService/PS8</value>
+				<value>http://localhost:8020/TraderService/PS8</value>
+			</util:list>
+        </property>
+    </bean>
     <jaxws:client id="balancer34" serviceClass =  "com.service.PersonalSales">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean id="RandomPS8" class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/PS8</value>
-								<value>http://localhost:8010/TraderService/PS8</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					<ref bean = "RandomPS8" />
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>    
 
+<bean id="RandomPS9" class="com.balancerLL.LCLoadBalanceStrategy">
+        <property name="alternateAddresses">
+        	<util:list>
+				<value>http://localhost:8080/TraderService/PS9</value>
+				<value>http://localhost:8010/TraderService/PS9</value>
+				<value>http://localhost:8020/TraderService/PS9</value>
+			</util:list>
+        </property>
+    </bean>
     <jaxws:client id="balancer35" serviceClass =  "com.service.PersonalSales">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean id="RandomPS9" class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/PS9</value>
-								<value>http://localhost:8010/TraderService/PS9</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					<ref bean = "RandomPS9" />
 				</property>
 			</bean> 
        </jaxws:features>
     </jaxws:client>    
 
+<bean id="RandomPS10" class="com.balancerLL.LCLoadBalanceStrategy">
+       <property name="alternateAddresses">
+       	<util:list>
+			<value>http://localhost:8080/TraderService/PS10</value>
+			<value>http://localhost:8010/TraderService/PS10</value>
+			<value>http://localhost:8020/TraderService/PS10</value>
+		</util:list>
+       </property>
+   </bean>
     <jaxws:client id="balancer36" serviceClass =  "com.service.PersonalSales">
        <jaxws:features>
-          	<bean class = "com.balancer.NewLoadDistributorFeature">
+          	<bean class = "com.balancerLL.NewLoadDistributorFeature">
 		 		<property name = "strategy">
-					<bean id="RandomPS10" class="com.balancer.LCLoadBalanceStrategy">
-				        <property name="alternateAddresses">
-				        	<util:list>
-								<value>http://localhost:8080/TraderService/PS10</value>
-								<value>http://localhost:8010/TraderService/PS10</value>
-								<!-- <value>http://localhost:8082/TraderService/hw1</value> -->
-							</util:list>
-				        </property>
-				    </bean>
+					<ref bean = "RandomPS10" />
 				</property>
 			</bean> 
        </jaxws:features>

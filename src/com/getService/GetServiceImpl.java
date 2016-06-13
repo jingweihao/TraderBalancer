@@ -91,6 +91,12 @@ public class GetServiceImpl implements GetService
 		Hello1 h = (Hello1)context.getBean(balancer);
 		System.out.println("balance Hello1Service~~~~~~~~~");
 		return h.sayHello1(person);
+		
+//		String addresses = "RandomH" + ith;
+//		LCLoadBalanceStrategy strategy = (LCLoadBalanceStrategy) context.getBean(addresses);
+//		strategy.setestimatenum(1); // default 1
+//		System.out.println("balance Hello1Service~~~~~~~~~");
+//		return h.sayHello1(person);
 	}
 	
 	public ArrayList<SearchResult> TestSearch(String keyword, int ith)
